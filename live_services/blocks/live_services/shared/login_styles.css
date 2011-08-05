@@ -1,0 +1,64 @@
+
+/*******************************************************************************
+Copyright (C) 2009  Microsoft Corporation. All rights reserved.
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License version 2 as
+published by the Free Software Foundation.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+*******************************************************************************/
+
+
+
+#wlLogin .wlStyle {
+	font-family: "Segoe UI Light", Arial, Helvetica, sans-serif;
+	font-size: 1.6em;
+	color: #333333;
+}
+#wlLogin .wlStyleScript {
+	font-family: "Segoe Script", "Felt Tip Roman", "Comic Sans MS";
+	font-size: 1.6em;
+	color: #333333;
+}
+#wlLogin .wlStyleSub {
+	font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+	font-size: .85em;
+	color: #666666;
+}
+#wlLogin a.button {
+        background:transparent url(glossybtn32.gif) no-repeat scroll top right;
+        height: 32px; /*change this value to image height*/
+        display: block;
+		float:left;
+		margin-right: 0px;
+		padding-right: 12px; /*change value to image width */
+				/* FONT PROPERTIES */
+		text-decoration: none;
+		color: #333333;
+		font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+		font-size:1.2em;
+		font-weight:normal;
+}
+
+#wlLogin a.button span {
+	background: transparent url(glossybtn32.gif) no-repeat;
+	display: block;
+	line-height: 12px; /* CHANGE THIS VALUE ACCORDING TO BUTTON HEIGHT */;
+	padding: 9px 0px 11px 12px;
+}
+
+#wlLogin a.button:hover {
+	background-position: bottom right;
+
+}
+#wlLogin a.button:hover span {
+    background-position: bottom left;
+}

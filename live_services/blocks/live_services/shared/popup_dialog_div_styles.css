@@ -1,0 +1,337 @@
+
+/*******************************************************************************
+Copyright (C) 2009  Microsoft Corporation. All rights reserved.
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License version 2 as
+published by the Free Software Foundation.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+*******************************************************************************/
+
+
+    html {font-size:100.01%}
+    
+    body {
+        font:normal 62.5%/1.7 Tahoma, Arial;
+        margin:0;
+        padding:0;
+        background-color:#CCCCCC;
+    }
+
+    input, select, label, textarea {
+        font-family: Tahoma, Arial;
+        font-size:1.0em;
+    }
+    
+    td {
+        vertical-align:top;
+        font-size:1.2em;
+    }
+
+    #popupContainer {
+        padding:0;
+        margin:0;
+    }
+
+    #popupHeaderContainer{
+        margin:0;
+        height:45px;
+        min-height:45px;
+
+    }
+    #popupHeaderContainer h3 {
+        padding:8px 12px 8px 12px;
+        margin:0;
+        font-size:17px;
+        font-weight:normal;
+        color:#3C3C3C;
+        background-image:url(../shared/images/lightboxtop.gif);
+        background-position:top;
+        background-repeat:no-repeat;
+    }
+
+    #popupHeaderContainer h3 img#closeImage
+    {       
+        position:absolute;
+        right:16px;
+        top:22px;
+        cursor:pointer;
+    }
+
+    #popupBodyContainer
+    {
+        background-image:url(../shared/images/lightboxbg.gif);
+        background-repeat:repeat-y;
+        padding-top:8px;
+
+    }
+    #popupBody {
+        padding-left:16px;
+        padding-top:0px;
+        padding-bottom:8px;
+        padding-right:16px;
+        margin:2px;
+        text-align:left;
+    }
+
+    #popupBody div#overflowContainer
+    {
+        min-height:360px;
+        height:360px;
+        overflow:auto;
+        width:738px;
+        border:1px solid #C9C9C9;
+        margin-top:8px;
+        margin-bottom:16px;
+        padding-top:8px;
+        position:relative;
+    }
+
+    #popupBody div#overflowEventContainer
+    {
+        min-height:330px;
+        height:330px;
+        overflow:auto;
+        width:738px;
+        margin-top:8px;
+        margin-bottom:16px;
+        padding-top:8px;
+        position:relative;
+    }
+
+    #popupBody div#overflowEventViewContainer
+    {
+        min-height:360px;
+        height:360px;
+        overflow:auto;
+        width:750px;
+        margin-top:8px;
+        margin-bottom:16px;
+        padding-top:8px;
+        position:relative;
+    }
+
+    .overrideOverflow
+    {
+        border:none;
+        overflow:hidden;
+    }
+
+    .refwdSeparator
+    {
+        width:700px;
+    }
+
+    #popupBody table.bodyMainTable
+    {
+        width:720px;
+        margin-bottom:16px;
+    }
+
+    #popupBody table.bodyMainTable td.caption, #popupBody table.bodyMainTable td.caption label
+    {
+        text-align:right;
+        margin-right:10px;
+    }
+
+    #popupBody table.bodyMainTable td.messageHeader
+    {
+        padding-right:10px;
+    }
+
+
+    #popupBody table.bodyMainTable td.messageHeaderValue
+    {
+        width:686px;
+    }
+
+
+    #popupBody table.bodyMainTable td.messageBody, #popupBody table.bodyMainTable td.eventBody
+    {
+        border-top:1px solid #CCCCCC;
+        border-bottom:1px solid #CCCCCC;
+
+    }
+    
+    #popupBody table.bodyMainTable td.eventBody div.overflow
+    {
+        overflow:auto;
+        height:246px;
+        width:716px;
+        min-height:246px;
+    }
+
+
+    #popupBody table.bodyMainTable td.messageBody div.overflow
+    {
+        overflow:auto;
+        height:312px;
+        width:726px;
+        min-height:306px;
+    }
+
+    #popupBody table.bodyMainTable tr.messageFooterRow td
+    {
+        padding:8px;
+        vertical-align:middle;
+    }
+
+    #popupBody table.bodyMainTable tr.messageFooterRow td #actions
+    {
+        width:270px;
+        text-align:left;
+        float:left;
+        line-height:20px;
+    }
+
+    #popupBody table.bodyMainTable tr.messageFooterRow td #messageCount
+    {
+        width:160px;
+        text-align:center;
+        float:left;
+    }
+
+    #popupBody table.bodyMainTable tr.messageFooterRow td #inboxLink
+    {
+        width:270px;
+        text-align:right;
+        float:right;
+    }
+    #popupBody table#eventOptionsTable td
+    {
+        padding:2px;
+    }
+
+    #popupBody table#eventOptionsTable tr#eventInviteeRow td
+    {
+        padding-bottom:8px;
+    }
+
+    #popupBody table#eventOptionsTable tr#eventFooterRow td#optionsMessage
+    {
+        padding:18px 0 8px 0;
+        text-align:left;
+    }
+
+    #popupBody table#eventOptionsTable tr#eventFooterRow td#send
+    {
+        padding:18px 4px 8px 0;
+        text-align:right;
+    }
+
+    #popupBody table#eventOptionsTable tr#eventFooterRow td#send input
+    {
+        width:68px;
+        margin-left:8px;
+    }
+
+    #popupBody table.bodyMainTable  tr#eventFooterRow td#inboxLink
+    {
+        padding:18px 0px 8px 0px;
+        text-align:right;
+    }
+
+    #popupBody table.bodyMainTable tr#sendAlertMessageRow td
+    {
+        padding:0px 0 12px 0;
+    }
+
+    #popupBody table.bodyMainTable tr#sendAlertActionsRow td#send
+    {
+        text-align:right;
+        padding:0px 0 12px 0;
+    }
+    
+    #popupBody table.bodyMainTable tr#sendAlertActionsRow td#send input
+    {
+        width:68px;
+        margin-left:8px;
+        margin-top:4px;
+    }
+
+    #popupBody table#emailOptionsTable tr td
+    {
+        padding:4px;
+    }
+
+    #popupBody table#emailOptionsTable tr#attachFileLinkRow td
+    {
+        padding:2px;
+    }
+
+    a.actionLink
+    {
+        text-decoration:none;
+    }
+
+    a.actionLink img
+    {
+        border:none;
+    }
+
+    a.actionLink a.actionLink:hover, a.actionLink:link, a.actionLink:visited
+    {
+        color:#0066CC;
+    }
+
+    #attachmentsContainer {
+            display:block;
+            min-height:78px;
+            height:78px;
+            overflow:auto;            
+            border:1px solid #C9C9C9;
+            padding:0px 8px;
+            width:600px;
+            }
+    #attachmentsContainer table
+    {
+        border:none;
+    }
+    #attachmentsContainer table td
+    {
+        font-size: 1.0em;
+        padding:0px;
+        vertical-align:middle;
+    }
+    div#buttons
+    {
+        width:100%;
+        text-align:right;
+        margin-bottom:24px
+    }
+    div#buttons #sendButton
+    {
+        margin-right:8px;
+        width:68px;
+        font-size:1.2em;
+    }
+    div#buttons #cancelButton
+    {
+        margin-right:0px;
+        width:68px;
+        font-size:1.2em;
+    }
+   .input { width:180px; }
+   .smallInput {width:130px;}
+   .verticalSeparator
+    {
+        color:#C9C9C9;
+    }
+
+   #cal1Container { margin:0px; }
+
+   #eventViewFooter
+    {
+        text-align:right;        
+        margin-bottom:10px;
+        font-size:1.1em;
+    }
+

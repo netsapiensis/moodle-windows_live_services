@@ -1,0 +1,387 @@
+<?php
+
+/*******************************************************************************
+Copyright (C) 2009  Microsoft Corporation. All rights reserved.
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License version 2 as
+published by the Free Software Foundation.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+*******************************************************************************/
+    global $CFG;
+    // identity service
+    $appId = @$CFG->block_live_services_appId;
+    $secretKey = @$CFG->block_live_services_secretKey;
+    $identityScreenshot = "$CFG->wwwroot/blocks/live_services/services/identity/screenshot.png";
+
+    // email and calendar
+    $emailChecked = empty( $CFG->block_live_services_showEmail ) ? '' : 'checked="checked"';
+
+    $useEWS = "";
+    if( !empty( $CFG->block_live_services_useEWS ) )
+    {
+        $useEWS = 'checked="checked"';
+        $ewsFields = '';
+        $ewsFieldsLabel = 'required';
+        $ewsFieldsImageStyle = 'style="visibility: visible;" ';
+    }
+    else
+    {
+        $ewsFields = 'disabled="disabled"';
+        $ewsFieldsLabel = 'disabled';
+        $ewsFieldsImageStyle = 'style="visibility: hidden;" ';
+    }
+
+    $ewsServiceAccountUserName = @$CFG->block_live_services_ewsServiceAccountUserName;
+    $ewsServiceAccountPassword = @$CFG->block_live_services_ewsServiceAccountPassword;
+    $ewsServiceUrl = @$CFG->block_live_services_ewsServiceUrl;
+
+    $emailScreenshot = "$CFG->wwwroot/blocks/live_services/services/email/screenshot_outlook.png";
+
+    $calendarChecked = empty( $CFG->block_live_services_showCalendar ) ? '' : 'checked="checked"';
+
+    // messenger service
+    $messengerChecked = empty( $CFG->block_live_services_showMessenger ) ? '' : 'checked="checked"';
+
+    $messengerScreenshot = "$CFG->wwwroot/blocks/live_services/services/messenger/screenshot.png";
+
+    // alerts service
+    $alertsChecked = "";
+    if( !empty( $CFG->block_live_services_showAlerts ) )
+    {
+        $alertsChecked = 'checked="checked"';
+        $alertsFields = '';
+        $alertsFieldsLabel = 'required';
+        $alertsFieldsImageStyle = 'style="visibility: visible;" ';
+    }
+    else
+    {
+        $alertsFields = 'disabled="disabled"';
+        $alertsFieldsLabel = 'disabled';
+        $alertsFieldsImageStyle = 'style="visibility: hidden;" ';
+    }
+
+    $alertsPinId = @$CFG->block_live_services_alertsPinId;
+    $alertsPinPassword = @$CFG->block_live_services_alertsPinPassword;
+
+    $alertsScreenshot = "$CFG->wwwroot/blocks/live_services/services/alerts/screenshot.png";
+
+    // search service
+    $searchChecked = empty($CFG->block_live_services_showSearch)?'':'checked="checked"';
+    $bingSearchEnabledChecked = empty($CFG->block_live_services_bingSearchEnabled)? '' : 'checked="checked"';
+
+    $searchScreenshot = "$CFG->wwwroot/blocks/live_services/services/search/screenshot.png";
+
+    // shared required image
+    $requiredFieldImageSource = "$CFG->wwwroot/pix/req.gif";
+
+?>
+
+<style type="text/css">
+    #live_services_config
+    {
+        text-align: left;
+        margin:0px 40px;
+    }
+
+    #live_services_config table
+    {
+        width:100%;
+        padding:2px;
+    }
+
+    #live_services_config td
+    {
+        vertical-align: top;
+        text-align: left;
+        padding:2px 10px;
+    }
+
+    #live_services_config td.inputCaption
+    {
+        width:160px;
+        text-align:left;
+    }
+
+    #live_services_config td.input
+    {
+        width:100%;
+        padding-right: 20px;
+    }
+
+    #live_services_config td.screenshot
+    {
+        text-align:center;
+        width:208px;
+    }
+
+    #live_services_config img.screenshot
+    {
+        margin-top:18px;
+        display:block;
+        border:1px solid #CCC;
+    }
+
+    #live_services_config span.imageCaption
+    {
+        font-size:0.7em;
+    }
+
+
+    #live_services_config hr
+    {
+        border: 1px dotted black;
+        height: 1px;
+        margin: 10px 0px;
+    }
+
+    input.small
+    {
+        width:20%;
+    }
+
+    input.medium
+    {
+        width:50%;
+    }
+
+    input.large
+    {
+        width:80%;
+    }
+
+    .disabled
+    {
+    	color: #999999;
+    }
+
+    .required
+    {
+    	color: #AA0000;
+    }
+
+    .live_service_setting
+    {
+        vertical-align: baseline;
+    }
+
+</style>
+<div id="live_services_config">
+    <table>
+        <tr><td colspan="2"><strong>Microsoft&nbsp;Live Services Plug-in for Moodle Settings</strong><br/>These settings are required. They allow this Moodle to access the Windows Live&trade;&nbsp;Services APIs. Before your
+                users can use any Microsoft Live Services Plug-in for Moodle Services from this Moodle, you need to
+                <a href="https://lx.azure.microsoft.com/Cloud/Provisioning/Default.aspx">register</a> for an Application ID from Microsoft.
+                This Application ID and Secret Key, along with your Moodle's domain name, create a Relying Party Suite (RPS). This
+                allows Microsoft to ensure that users are logging into your Moodle site and allows your users to come back
+                your site after successfully authenticating with their Windows Live ID credentials. Registration takes less
+                than five minutes.</td>
+            <td class="screenshot"><img class="screenshot" src="<?php echo $identityScreenshot ?>" title="Microsoft Live Services Plug-in for Moodle screenshot" />
+                <span class="imageCaption">Figure 1: Microsoft Live Services Plug-in for Moodle block header</span>
+            </td>
+       </tr>
+        <tr>
+            <td class="required">Application ID<img src="<?php echo $requiredFieldImageSource ?>" alt="Required field"
+                    title="Required field" class="req"/>
+            </td>
+            <td class="input">
+                <input type="text" class="medium" name="block_live_services_appId" value="<?php echo $appId ?>" />
+            </td>
+            <td class="screenshot">&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="required inputCaption">Secret Key<img src="<?php echo $requiredFieldImageSource ?>" alt="Required field" title="Required field" class="req"/></td>
+            <td>
+                <input type="text" class="medium" name="block_live_services_secretKey" value="<?php echo $secretKey ?>" />
+                <input type="hidden" name="block_live_services_showIdentity" value="1" />
+            </td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr><td colspan="3"><hr /></td></tr>
+        <tr>
+            <td colspan="2" style="vertical-align:middle">
+                <strong>Email&nbsp;and&nbsp;Calendar</strong><br />
+                Give users access to their online email and calendar using Microsoft Office Outlook&reg;&nbsp;Web Access (OWA). The Outlook block allows the user to create a new email or calendar event without leaving the current screen. If more customized options are needed, or if the user wants to see all of the emails or calendar events, the full online application can be launched in a new browser window by clicking the Inbox link.
+                <br/><br/>
+                If you choose not to use Outlook live, the Email and Calendar block will display links to Hotmail&reg;. To disable all email and calendar options, uncheck all checkboxes in this section.
+            </td>
+            <td class="screenshot" rowspan="7">
+                <img class="screenshot" src="<?php echo $emailScreenshot ?>" title="Email Screenshot" />
+                <span class="imageCaption">Figure 2: Outlook block</span>
+            </td>
+        </tr>
+        <tr><td class="inputCaption"><label for="block_live_services_useEWS">Use&nbsp;Outlook&nbsp;Live</label></td>
+            <td>
+                <input type="hidden" id="block_live_services_useEWS" name="block_live_services_useEWS" value="0" />
+                <input id="block_live_services_useEWS" type="checkbox" name="block_live_services_useEWS"
+                        value="1" <?php echo $useEWS; ?> onclick="javascript:void enableEwsServiceAccountFields( this );" />
+            </td>
+        </tr>
+        <tr>
+            <td id="block_live_services_ewsServiceAccountUserNameLabel" style="text-align: right; padding-right: 10px;"
+                    class="<?php echo $ewsFieldsLabel ?>">Service&nbsp;Account<img
+                    id="block_live_services_ewsServiceAccountUserNameImage" <?php echo $ewsFieldsImageStyle ?>
+                    src="<?php echo $requiredFieldImageSource ?>"
+                    alt="Required field" title="Required field" class="req" />
+            </td>
+            <td>
+                <input id="block_live_services_ewsServiceAccountUserName" type="text" class="medium"
+                        name="block_live_services_ewsServiceAccountUserName" value="<?php echo $ewsServiceAccountUserName ?>" title="OWA service account user name"
+                        <?php echo $ewsFields; ?> /><span style="font-size:smaller">&nbsp;example:&nbsp;admin@mydomain.edu</span>
+            </td>
+        </tr>
+        <tr>
+            <td id="block_live_services_ewsServiceAccountPasswordLabel" style="text-align: right; padding-right: 10px;"
+                    class="<?php echo $ewsFieldsLabel ?>">Password<img
+                    id="block_live_services_ewsServiceAccountPasswordImage" <?php echo $ewsFieldsImageStyle ?>
+                    src="<?php echo $requiredFieldImageSource ?>"
+                    alt="Required field" title="Required field" class="req" />
+            </td>
+            <td>
+                <input id="block_live_services_ewsServiceAccountPassword" type="text"  class="medium" maxlength="16"
+                        name="block_live_services_ewsServiceAccountPassword" value="<?php echo $ewsServiceAccountPassword ?>" title="OWA service account password"
+                        <?php echo $ewsFields; ?> />
+            </td>
+        </tr>
+        <tr>
+            <td id="block_live_services_ewsServiceUrlLabel" style="text-align: right; padding-right: 10px;"
+                    class="<?php echo $ewsFieldsLabel ?>">Outlook&nbsp;URL<img
+                    id="block_live_services_ewsServiceUrlImage" <?php echo $ewsFieldsImageStyle ?>
+                    src="<?php echo $requiredFieldImageSource ?>"
+                    alt="Required field" title="Required field" class="req" />
+            </td>
+            <td>
+                <input id="block_live_services_ewsServiceUrl" type="text" class="medium" maxlength="100"
+                        name="block_live_services_ewsServiceUrl" value="<?php echo $ewsServiceUrl ?>" title="OWA URL"
+                        <?php echo $ewsFields; ?> /><span style="font-size:smaller">&nbsp;example:&nbsp;https://pod51004.outlook.com</span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Show&nbsp;Email</label>
+            </td>
+            <td>
+                <input type="hidden" name="block_live_services_showEmail" value="0" />
+                <input type="checkbox" name="block_live_services_showEmail" value="1" <?php echo $emailChecked; ?> />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Show&nbsp;Calendar</label>
+            </td>
+            <td>
+                <input type="hidden" name="block_live_services_showCalendar" value="0" />
+                <input type="checkbox" name="block_live_services_showCalendar" value="1" <?php echo $calendarChecked; ?> />
+            </td>
+        </tr>
+        <tr><td colspan="3"><hr /></td></tr>
+        <tr>
+            <td colspan="2" style="vertical-align:middle">
+                <strong>Windows&nbsp;Live&nbsp;Messenger&reg;</strong><br />
+                Windows Live Messenger is now available for Moodle. Users can now use the familiar Messenger application for chatting with their classmates, teachers, or students.
+            </td>
+            <td rowspan="2" class="screenshot">
+                <img class="screenshot" src="<?php echo $messengerScreenshot ?>" title="Messenger Screenshot" />
+                <span class="imageCaption">Figure 3: Messenger block</span>
+            </td>
+        </tr>
+        <tr><td><label for="block_live_services_showMessenger">Show&nbsp;Messenger</label></td>
+            <td>
+                <input type="hidden" name="block_live_services_showMessenger" value="0" />
+                <input type="checkbox" id="block_live_services_showMessenger" name="block_live_services_showMessenger" value="1" <?php echo $messengerChecked; ?> />
+            </td>
+        </tr>
+        <tr><td colspan="3"><hr /></td></tr>
+        <tr>
+            <td colspan="2">
+                <p><b>Powerset&nbsp;and&nbsp;Bing&reg;&nbsp;Search</b><br />
+                Provide your users with the ability to highlight onscreen text and search the web for related information using Powerset and/or the new Bing search engine from Microsoft. A textbox is also provided for user input so any topic can be searched from Moodle.<br /><br/>
+                If the 'Enable Bing Search' checkbox is checked, Bing will be the default search. Disabling Bing Search will make Powerset the default search.
+            </td>
+            <td class="screenshot" rowspan="2">
+                <img class="screenshot"  src="<?php echo $searchScreenshot ?>" title="Search Screenshot" />
+                <span class="imageCaption">Figure 5: Search block with Bing and Powerset enabled</span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Show&nbsp;Search</label>
+            </td>
+            <td>
+                <input type="hidden" name="block_live_services_showSearch" value="0" />
+                <input type="checkbox" name="block_live_services_showSearch" value="1" <?php echo $searchChecked; ?> />
+            </td>
+        </tr>
+        <tr>
+            <td><label>Enable&nbsp;Bing&nbsp;Search</label>
+            </td>
+            <td>
+                <input type="hidden" name="block_live_services_bingSearchEnabled" value="0" />
+                <input type="checkbox" name="block_live_services_bingSearchEnabled" value="1" <?php echo $bingSearchEnabledChecked; ?> />
+            </td>
+        </tr>
+        <tr><td colspan="3"><hr /></td></tr>
+        <tr><td>&nbsp;</td><td colspan="2"><span class="required">* indicates a value that is required if its parent setting is enabled. Application ID and Secret Key are always required to use this block.</span></td></tr>
+        <tr>
+            <td>
+                <label>&nbsp;</label>
+            </td>
+            <td colspan="2" align="center">
+                &nbsp;<br />
+                <input type="submit" value="<?php print_string('savechanges'); ?>" />
+            </td>
+        </tr>
+    </table>
+</div>
+<script type="text/javascript" language="javascript">
+
+        function enableEwsServiceAccountFields(checkbox) {
+            var obj = document.getElementById('block_live_services_ewsServiceAccountUserName');
+            obj.disabled = checkbox.checked ? "" : "disabled";
+            obj = document.getElementById('block_live_services_ewsServiceAccountUserNameLabel');
+            obj.className = checkbox.checked ? "required" : "disabled";
+            obj = document.getElementById('block_live_services_ewsServiceAccountUserNameImage');
+            obj.style.visibility = checkbox.checked ? "visible" : "hidden";
+
+            obj = document.getElementById('block_live_services_ewsServiceAccountPassword');
+            obj.disabled = checkbox.checked ? "" : "disabled";
+            obj = document.getElementById('block_live_services_ewsServiceAccountPasswordLabel');
+            obj.className = checkbox.checked ? "required" : "disabled";
+            obj = document.getElementById('block_live_services_ewsServiceAccountPasswordImage');
+            obj.style.visibility = checkbox.checked ? "visible" : "hidden";
+
+            obj = document.getElementById('block_live_services_ewsServiceUrl');
+            obj.disabled = checkbox.checked ? "" : "disabled";
+            obj = document.getElementById('block_live_services_ewsServiceUrlLabel');
+            obj.className = checkbox.checked ? "required" : "disabled";
+            obj = document.getElementById('block_live_services_ewsServiceUrlImage');
+            obj.style.visibility = checkbox.checked ? "visible" : "hidden";
+
+        }
+
+        function enableAlertFields( checkbox )
+        {
+            var obj = document.getElementById( 'block_live_services_alertsPinId' );
+            obj.disabled = checkbox.checked ? "" : "disabled";
+            obj = document.getElementById( 'block_live_services_alertsPinIdLabel' );
+            obj.className = checkbox.checked ? "required" : "disabled";
+            obj = document.getElementById( 'block_live_services_alertsPinIdImage' );
+            obj.style.visibility = checkbox.checked ? "visible" : "hidden";
+
+            obj = document.getElementById( 'block_live_services_alertsPinPassword' );
+            obj.disabled = checkbox.checked ? "" : "disabled";
+            obj = document.getElementById( 'block_live_services_alertsPinPasswordLabel' );
+            obj.className = checkbox.checked ? "required" : "disabled";
+            obj = document.getElementById( 'block_live_services_alertsPinPasswordImage' );
+            obj.style.visibility = checkbox.checked ? "visible" : "hidden";
+        }
+</script>
+
+

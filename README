@@ -1,0 +1,24 @@
+Microsoft Live Services for Moodle 2.0
+
+GENERAL PROCEDURE
+-----------------
+1.	Create a Live Services account and get a Windows Live Application ID at https://manage.dev.live.com/.
+4.	Copy live_services/* to your Moodle installation folder.
+5.	In the Moodle admin panel, activate Windows Live ID authentication.
+6.	Configure Windows Live Services block with your application id.
+7.	Add Live Services block to your pages so that user can access it.
+8.	Set the right authentication option for Moodle users.
+
+
+To use the Outlook Live service: 
+--------------------------------
+1.	Enroll your school and register a Live@edu account.
+2.	Setup impersonation account.
+3.	Configure outlook live block.
+4.	Set up users and their authentication options.
+
+
+See more information in :
+	- live_services/documentation/Microsoft_Live_Services_for_Moodle_User_FAQ.rtf
+	- live_services/documentation/Microsoft_Services_for_Moodle_-_Developers_Guide.rtf
+	- live_services/documentation/Microsoft_Services_for_Moodle_-_Getting_Started.rtf
