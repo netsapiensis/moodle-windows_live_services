@@ -24,11 +24,14 @@ require_once( $CFG->dirroot . '/blocks/live_services/shared/utils.php' );
 require_once( $CFG->dirroot . '/auth/liveid/settings.php' );
 require_once( $CFG->dirroot . '/auth/liveid/windowslivelogin_factory.php' );
 
-global $DB;
+global $DB, $PAGE, $OUTPUT, $SITE;
+
+$PAGE->set_url('/authenticate.php');
+$PAGE->set_course($SITE);
 
 // if we are logging out, don't bother with this page
 $action = @optional_param('action', '', PARAM_TEXT);
-if( $action == 'logout' ) { header( "Location: $CFG->wwwroot" ); }
+if( $action == 'logout' ) { header( "Location: $CFG->wwwroot" ); exit(); }
 
 // Initialize the WindowsLiveLogin module.
 $wll = WindowsLiveLogin_Factory::initFromMoodleConfig( $CFG );
@@ -50,6 +53,7 @@ if( $AccessToken )
 else
 {//print_error("no");
     header("Location: ".$wll->getReturnUrl()."?return=true");
+	exit();
 }
 if( $isConsentGranted )
 {
@@ -154,7 +158,7 @@ SIGN_IN_SUCCESS;
         break;
 
 }
-print_header('Windows Live&trade; ID Authentication'.' - '.format_string($SITE->fullname));
+print_header('Windows Live&trade; ID Authentication'.' - '.$SITE->fullname);
 ?>
         <center>
             <table><tr><td width="450" align="center">

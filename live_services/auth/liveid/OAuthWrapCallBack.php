@@ -30,7 +30,7 @@ $wll->setDebug( $DEBUG );
 $params=$_REQUEST;
 for($i=0;$i<count($params);$i++)
 {
-    if($params['return']||$params['refresh'])
+    if(!empty($params['return'])||!empty($params['refresh']))
     {
         break;
     }
