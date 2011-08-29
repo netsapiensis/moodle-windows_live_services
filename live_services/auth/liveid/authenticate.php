@@ -6,6 +6,11 @@ This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License version 2 as
 published by the Free Software Foundation.
 
+Copyright (C) 2011 NetSapiensis AB. All rights reserved.
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License version 2 as
+published by the Free Software Foundation.
+
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -24,14 +29,11 @@ require_once( $CFG->dirroot . '/blocks/live_services/shared/utils.php' );
 require_once( $CFG->dirroot . '/auth/liveid/settings.php' );
 require_once( $CFG->dirroot . '/auth/liveid/windowslivelogin_factory.php' );
 
-global $DB, $PAGE, $OUTPUT, $SITE;
-
-$PAGE->set_url('/authenticate.php');
-$PAGE->set_course($SITE);
+global $DB;
 
 // if we are logging out, don't bother with this page
 $action = @optional_param('action', '', PARAM_TEXT);
-if( $action == 'logout' ) { header( "Location: $CFG->wwwroot" ); exit(); }
+if( $action == 'logout' ) { header( "Location: $CFG->wwwroot" ); }
 
 // Initialize the WindowsLiveLogin module.
 $wll = WindowsLiveLogin_Factory::initFromMoodleConfig( $CFG );
@@ -53,7 +55,6 @@ if( $AccessToken )
 else
 {//print_error("no");
     header("Location: ".$wll->getReturnUrl()."?return=true");
-	exit();
 }
 if( $isConsentGranted )
 {
@@ -158,7 +159,7 @@ SIGN_IN_SUCCESS;
         break;
 
 }
-print_header('Windows Live&trade; ID Authentication'.' - '.$SITE->fullname);
+print_header('Windows Live&trade; ID Authentication'.' - '.format_string($SITE->fullname));
 ?>
         <center>
             <table><tr><td width="450" align="center">
