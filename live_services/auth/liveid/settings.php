@@ -38,5 +38,9 @@ $COOKIE_WLS_LIVEID = 'wls_liveId';
 // Landing pages to use after processing login and logout respectively.
 $LOGIN = 'authenticate.php';
 $LOGOUT = 'authenticate.php';
+global $CFG;
 
-?>
+$text = "<p> Please use the <a href='{$CFG->wwwroot}/admin/settings.php?section=blocksettinglive_services'>Block settings page</a> to configure Microsoft Live Services.";
+
+$settings->add(new admin_setting_html('e1', '', '', '', $text));
+
