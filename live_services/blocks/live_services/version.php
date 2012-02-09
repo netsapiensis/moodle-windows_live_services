@@ -22,5 +22,5 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 *******************************************************************************/
 
-$plugin->version = 2011072901;
+$plugin->version = 2012020901;
 $plugin->cron = 300;

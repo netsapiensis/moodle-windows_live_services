@@ -40,7 +40,7 @@ class admin_setting_html extends admin_setting {
     public function __construct($name, $visiblename, $description, $defaultsetting, $file) {
         
         $this->file = $file;
-        $name = 'block_course_menu_' . $name;
+        $name = 'block_live_services' . $name;
         parent::__construct($name, $visiblename, $description, $defaultsetting);
     }
 
@@ -78,4 +78,3 @@ class admin_setting_html extends admin_setting {
         return $this->html;
     }
 }
-?>
